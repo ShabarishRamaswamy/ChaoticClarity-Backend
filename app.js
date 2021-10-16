@@ -32,7 +32,9 @@ app.get('/uploads', (req, res) => {
 app.get('/about', (req, res) => {
 	res.render('about');
 });
-
+app.get('/dashboard', (req, res) => {
+	res.render('dash');
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
