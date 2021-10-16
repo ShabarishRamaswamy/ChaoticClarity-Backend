@@ -8,7 +8,7 @@ var PORT = process.env.PORT || 5000;
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +22,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(indexRouter);
 app.use(usersRouter);
+
+app.get('/', (req, res) => {
+	res.render('index');
+});
+app.get('/uploads', (req, res) => {
+	res.render('uploads');
+});
+app.get('/about', (req, res) => {
+	res.render('about');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,6 +48,8 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
 
 app.listen(PORT, () => {
   console.log(`App running on PORT: ${PORT}`)
