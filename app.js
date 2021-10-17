@@ -1,9 +1,12 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var PORT = process.env.PORT || 5000;
+var session = require('express-session')
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,6 +22,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+const oneDay = 1000 * 60 * 60 * 24;
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  saveUninitialized:true,
+  cookie: { maxAge: oneDay },
+  resave: false 
+}));
 
 app.use(indexRouter);
 app.use(usersRouter);
