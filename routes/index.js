@@ -51,12 +51,15 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
     }).then(async (resp) => {
       console.log(resp.data.login)
       var user = await User.findOne({ username: resp.data.login })
-      if(!user) {
+      if(!user){
         user = new User({
           username: resp.data.login,
           githubCode: session.code,
           accessToken: access_token
         })
+        await user.save()
+      }else if(user.accessToken !== access_token){
+        user.accessToken = access_token
         await user.save()
       }
       req.session.active = true

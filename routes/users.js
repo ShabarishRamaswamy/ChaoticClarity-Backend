@@ -30,16 +30,8 @@ router.post('/user/register', session_checker, function(req, res, next) {
 /**
  * @Method - GET
  */
-router.post('/user/:userid/uploaded', session_checker, function(req, res, next) {
+router.post('/user/uploaded', session_checker, function(req, res, next) {
   res.send('index');
-});
-
-
-/**
- * @Method - GET
- */
- router.get('/uploads', session_checker,(req, res) => {
-  res.render('uploads', { link: req.session.code });
 });
 
 module.exports = router;
