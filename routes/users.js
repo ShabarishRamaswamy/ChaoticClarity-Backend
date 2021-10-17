@@ -22,8 +22,8 @@ router.post('/user/register', session_checker, function(req, res, next) {
 /**
  * @Method - GET
  */
-router.get('/dashboard', session_checker, function(req, res, next) {
-  res.send('dash');
+ router.get('/dashboard', session_checker, function(req, res, next) {
+  res.render('dash', { link: req.session.code });
 });
 
 
@@ -38,8 +38,8 @@ router.post('/user/:userid/uploaded', session_checker, function(req, res, next) 
 /**
  * @Method - GET
  */
- router.get('/uploads', session_checker, (req, res) => {
-	res.render('uploads');
+ router.get('/uploads', session_checker,(req, res) => {
+  res.render('uploads', { link: req.session.code });
 });
 
 module.exports = router;

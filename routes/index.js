@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 /**
  * @Method - GET
  */
- router.get('/login/github/response?:code', async function(req, res, next) {
+ router.get('/login/github/response?:code', async(req, res, next) => {
   console.log(req.query.code);
 
   var session = req.session;
@@ -49,13 +49,10 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
         'user-agent': process.env.GITHUB_USER_AGENT
       }
     }).then(async (resp) => {
-      // console.log(resp.data)
-      // var user_data = JSON.parse(resp.data)
-
       console.log(resp.data.login)
       var user = await User.findOne({ username: resp.data.login })
       if(!user) {
-        var user = new User({
+        user = new User({
           username: resp.data.login,
           githubCode: session.code,
           accessToken: access_token
@@ -65,29 +62,16 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
       req.session.active = true
       req.session.accessToken = user.accessToken
       req.session.username = user.username
+
+      res.redirect('/uploads')
     })
 
   })
   .catch(function (error) {
-    console.log(error);
+    console.log("Error: " + error)
+    res.redirect('/register')
   });
-  res.render('uploads', { link: session.code });
 })
-
-
-/**
- * @Method - GET
- */
- router.get('/test', session_checker, function(req, res, next) {
-  session = req.session;
-
-  res.render('about', { link: session.code });
-});
-
-router.get('/dashboard', function(req, res, next) {
-  session = req.session;
-  res.render('dash', { link: session.code });
-});
 
 /**
  * @Method - GET
