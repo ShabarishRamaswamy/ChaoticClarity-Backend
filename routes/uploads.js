@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
         console.log(user)
         if(user){
             user.uploadedPDFs = user.uploadedPDFs.append(file.originalname)
+            await user.save()
             cb(null, `${req.session.username}-${user.uploadedPDFs.length}-${file.originalname}`)
         }else{
             cb(null, `${req.session.username}-${0}-${file.originalname}`)
