@@ -65,7 +65,7 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
   .catch(function (error) {
     console.log(error);
   });
-  res.send("Logged  in!")
+  res.render('uploads', { link: session.code });
 })
 
 /**
@@ -77,6 +77,10 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
   res.render('about', { link: session.code });
 });
 
+router.get('/dashboard', function(req, res, next) {
+  session = req.session;
+  res.render('dash', { link: session.code });
+});
 
 /**
  * @Method - GET
@@ -91,7 +95,7 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
 
   console.log(process.env.GITHUB_CLIENT_ID)
 
-  res.render('about', {link: url});
+  res.render('login', {link: url});
 });
 
 module.exports = router;
