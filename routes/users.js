@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const User = require('../models/user');
+var session_checker = require('../middlewares/session_checker')
 
 /**
  * @Method - GET
  */
-router.get('/user', function(req, res, next) {
+router.get('/user', session_checker, function(req, res, next) {
   res.send('respond with a resource');
 });
 
@@ -13,7 +14,7 @@ router.get('/user', function(req, res, next) {
 /**
  * @Method - GET
  */
-router.post('/user/register', function(req, res, next) {
+router.post('/user/register', session_checker, function(req, res, next) {
   res.send('respond with a resource');
 });
 
@@ -21,7 +22,7 @@ router.post('/user/register', function(req, res, next) {
 /**
  * @Method - GET
  */
-router.post('/dashboard', function(req, res, next) {
+router.get('/dashboard', session_checker, function(req, res, next) {
   res.send('dash');
 });
 
@@ -29,7 +30,7 @@ router.post('/dashboard', function(req, res, next) {
 /**
  * @Method - GET
  */
-router.post('/user/:userid/uploaded', function(req, res, next) {
+router.post('/user/:userid/uploaded', session_checker, function(req, res, next) {
   res.send('index');
 });
 
@@ -37,7 +38,7 @@ router.post('/user/:userid/uploaded', function(req, res, next) {
 /**
  * @Method - GET
  */
- router.get('/uploads', (req, res) => {
+ router.get('/uploads', session_checker, (req, res) => {
 	res.render('uploads');
 });
 
