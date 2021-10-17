@@ -1,4 +1,6 @@
 require('dotenv').config();
+require('./db/mongoose');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,9 +9,9 @@ var logger = require('morgan');
 var PORT = process.env.PORT || 5000;
 var session = require('express-session')
 
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var utilsRouter = require('./routes/utils');
 
 const app = express();
 
@@ -33,19 +35,8 @@ app.use(session({
 
 app.use(indexRouter);
 app.use(usersRouter);
+app.use(utilsRouter);
 
-app.get('/', (req, res) => {
-	res.render('index');
-});
-app.get('/uploads', (req, res) => {
-	res.render('uploads');
-});
-app.get('/about', (req, res) => {
-	res.render('about');
-});
-app.get('/dashboard', (req, res) => {
-	res.render('dash');
-});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

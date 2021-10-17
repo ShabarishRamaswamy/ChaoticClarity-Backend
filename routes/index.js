@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
+const User = require('../models/user');
+const { encrypt, decrypt } = require('../utils/crypto');
 
 
 /* GET home page. */
@@ -23,7 +25,7 @@ router.get('/', function(req, res, next) {
   res.redirect('/login/github/getUserEmail');
 });
 
-router.get('/login/github/getUserEmail', (req, res, next) => {
+router.get('/login/github/getUserEmail', async(req, res, next) => {
   var session = req.session;
 
   axios.post(process.env.GITHUB_ACCESS_URL, {
@@ -45,12 +47,19 @@ router.get('/login/github/getUserEmail', (req, res, next) => {
         Accept: "application/vnd.github.v3+json",
         'user-agent': process.env.GITHUB_USER_AGENT
       }
-    }).then(resp => {
+    }).then(async (resp) => {
       // console.log(resp.data)
       // var user_data = JSON.parse(resp.data)
-      console.log(resp.data.login)
-    })
 
+      console.log(resp.data.login)
+      var user = new User({
+        username: resp.data.login,
+        githubCode: session.code,
+        accessToken: access_token
+      })
+      await user.save()
+      req.session.active = true
+    })
 
   })
   .catch(function (error) {
