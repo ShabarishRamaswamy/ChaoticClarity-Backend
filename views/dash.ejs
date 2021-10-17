@@ -31,7 +31,7 @@
     
         <!-- CSS -->
         <link rel="stylesheet" href="style.css">
-    
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
         <!-- FontAwesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
    </head>
@@ -52,7 +52,7 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: #05362c;
+  background: linear-gradient(#034235,#011612);
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -150,7 +150,7 @@
   border: none;
   border-radius: 12px;
   transition: all 0.5s ease;
-  background: #2f583d;
+  background: linear-gradient(rgb(50, 161, 137), rgb(16, 80, 64));
 }
 .sidebar.open input{
   padding: 0 20px 0 50px;
@@ -162,16 +162,16 @@
   left: 0;
   transform: translateY(-50%);
   font-size: 22px;
-  background: #2f583d;
+  background: linear-gradient(rgb(50, 161, 137), rgb(16, 80, 64));
   color: #FFF;
 }
 .sidebar.open .bx-search:hover{
-  background: #2f583d;
+  background: linear-gradient(rgb(50, 161, 137), rgb(16, 80, 64));
   color: #FFF;
 }
 .sidebar .bx-search:hover{
   background: #FFF;
-  color: #2f583d;
+  color: #fff;
 }
 .sidebar li a{
   display: flex;
@@ -181,7 +181,7 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #2f583d;
+  background: linear-gradient(rgb(50, 161, 137), rgb(16, 80, 64));
 }
 .sidebar li a:hover{
   background: #FFF;
@@ -264,7 +264,7 @@
 }
 .home-section{
   position: relative;
-  background: #dbf3dd;
+  background: #000000;
   min-height: 100vh;
   top: 0;
   left: 78px;
@@ -278,11 +278,12 @@
 }
 .home-section .text{
   display: inline-block;
-  margin-left: 28%;
-  color: #2f583d;
+  background: black;
+  margin-left: 38%;
+  color: #b1f8c9;
   font-size: 3.5vw;
   font-weight: bold;
-  font-family: Cinzel;
+  font-family: Orbitron;
 }
 @media (max-width: 420px) {
   .sidebar li .tooltip{
@@ -300,7 +301,7 @@
     <ul class="nav-list">
       <li>
           <i class='bx bx-search' ></i>
-         <input type="text" placeholder="Search...">
+         <input type="text" placeholder="">
          <span class="tooltip">Search</span>
       </li>
       <li>
@@ -350,7 +351,7 @@
     </ul>
   </div>
   <section class="home-section">
-      <div class="text">_____Dashboard_____</div>
+      <div class="text">Dashboard</div>
   </section>
   <script>
   let sidebar = document.querySelector(".sidebar");
