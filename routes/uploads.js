@@ -44,7 +44,7 @@ const upload = multer({ storage })
 /**
  * @Method - POST
  */
- router.post('/upload', session_checker, upload.single('pdf'), (req, res) => {
+ router.post('/upload', upload.single('pdf'), (req, res) => {
     res.render('uploads', { link: req.session.code });
 });
 

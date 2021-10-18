@@ -25,7 +25,7 @@ router.get('/processPDF/:pdfname/:pdfnumber', session_checker, async(req, res, n
     var user = await User.findOne({ username: req.session.username })
     
     axios.post(process.env.ML_URL, {
-        filename: `${req.query.pdfname + req.query.pdfnumber + req.session.username}`
+        filename: `${req.query.pdfname}-${req.query.pdfnumber}-${req.session.username}`
     })
     
     res.render('about', { link: session.code });
