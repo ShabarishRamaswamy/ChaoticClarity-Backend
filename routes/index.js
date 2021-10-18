@@ -50,23 +50,26 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
       }
     }).then(async (resp) => {
       console.log(resp.data.login)
-      var user = await User.findOne({ username: resp.data.login })
+      var user = User.findOne({ username: resp.data.login })
       if(!user){
-        user = new User({
+        var user1 = new User({
           username: resp.data.login,
           githubCode: session.code,
           accessToken: access_token
         })
-        await user.save()
-      }else if(user.accessToken !== access_token){
-        user.accessToken = access_token
-        await user.save()
+         await user1.save()
+         if(user1.accessToken !== access_token){
+          user1.accessToken = access_token
+          console.log(access_token)
+          await user1.save()
+        }
       }
+     
       req.session.active = true
       req.session.accessToken = user.accessToken
       req.session.username = user.username
 
-      res.redirect('/uploads')
+      res.render('uploads')
     })
 
   })

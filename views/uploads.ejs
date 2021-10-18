@@ -26,7 +26,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="public/stylesheets/style.css">
 
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
@@ -191,10 +190,10 @@ input[type=file]::file-selector-button:hover {
           </ul>
           </div>
           <h2>OR</h2>
-        <form>
+        <form action="/upload" method="POST">
             <input type="file" id="fileUpload">
+            <input type="submit" class="btn btn-info btn-lg" style="margin-top: 50px; cursor:pointer; width:300px;" text="SUBMIT">
           </form>
-    <a class="btn btn-info btn-lg" style="margin-top: 50px; cursor:pointer; width:300px;" href="/dashboard" role="button">SUBMIT</a>
       </div>
   
     </div>
