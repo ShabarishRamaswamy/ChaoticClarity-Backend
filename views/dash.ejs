@@ -155,23 +155,8 @@
   padding: 0 20px 0 50px;
   width: 100%;
 }
-.sidebar .bx-search{
-  position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  font-size: 22px;
-  background: linear-gradient(rgb(50, 161, 137), rgb(16, 80, 64));
-  color: #FFF;
-}
-.sidebar.open .bx-search:hover{
-  background: linear-gradient(rgb(50, 161, 137), rgb(16, 80, 64));
-  color: #FFF;
-}
-.sidebar .bx-search:hover{
-  background: #FFF;
-  color: #fff;
-}
+
+
 .sidebar li a{
   display: flex;
   height: 100%;
@@ -374,17 +359,12 @@ body{
   <script>
   let sidebar = document.querySelector(".sidebar");
   let closeBtn = document.querySelector("#btn");
-  let searchBtn = document.querySelector(".bx-search");
 
   closeBtn.addEventListener("click", ()=>{
     sidebar.classList.toggle("open");
     menuBtnChange();
   });
 
-  searchBtn.addEventListener("click", ()=>{ 
-    sidebar.classList.toggle("open");
-    menuBtnChange(); 
-  });
 
   function menuBtnChange() {
    if(sidebar.classList.contains("open")){

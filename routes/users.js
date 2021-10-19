@@ -33,7 +33,7 @@ router.post('/user/register', session_checker, function(req, res, next) {
  */
 router.get('/user/uploaded', session_checker, async(req, res, next) => {
   const user = await User.findOne({ username: req.session.username })
-
+  console.log(user.uploadedPDFs)
   res.send('history', { list: user.uploadedPDFs });
 });
 

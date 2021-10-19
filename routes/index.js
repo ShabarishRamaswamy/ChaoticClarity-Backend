@@ -51,6 +51,7 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
     }).then(async (resp) => {
       console.log(resp.data.login)
       var user = User.findOne({ username: resp.data.login })
+      console.log("ALRIGHT!")
       if(!user){
         var user1 = new User({
           username: resp.data.login,

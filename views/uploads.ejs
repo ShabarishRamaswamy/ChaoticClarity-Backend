@@ -190,9 +190,9 @@ input[type=file]::file-selector-button:hover {
           </ul>
           </div>
           <h2>OR</h2>
-        <form action="/upload" method="POST">
-            <input type="file" id="fileUpload">
-            <input type="submit" class="btn btn-info btn-lg" style="margin-top: 50px; cursor:pointer; width:300px;" text="SUBMIT">
+        <form action="/upload"  method="POST"  enctype="multipart/form-data">
+            <input type="file" name="someFile" accept="application/pdf"/>
+            <input type="submit" class="btn btn-info btn-lg" style="margin-top: 50px; cursor:pointer; width:300px;" name='submit' value="submit">
           </form>
       </div>
   

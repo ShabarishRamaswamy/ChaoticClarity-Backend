@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
     },
 })
 
-const upload = multer({ storage })
+const upload = multer({  dest:"pdfs/", storage: storage })
 
 
 /**
@@ -44,8 +44,8 @@ const upload = multer({ storage })
 /**
  * @Method - POST
  */
- router.post('/upload', upload.single('pdf'), (req, res) => {
-    console.log("OKAY!")
+ router.post('/upload', upload.any(), (req, res) => {
+    console.log("DONE")
     res.render('dash', { link: req.session.code });
 });
 
