@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var PORT = process.env.PORT || 5000;
 var session = require('express-session')
+var multer  = require('multer');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -34,6 +35,8 @@ app.use(session({
   resave: false 
 }));
 
+
+
 app.use(indexRouter);
 app.use(usersRouter);
 app.use(utilsRouter);
@@ -43,6 +46,8 @@ app.use(uploadsRouter);
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
