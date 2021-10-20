@@ -11,9 +11,9 @@ const storage = multer.diskStorage({
     filename: async(req, file, cb) => {
         const user = await User.findOne({ username: req.session.username })
         const date = new Date()
-        console.log(user)
+        console.log("User: " + req.session.username, req.session.accessToken, req.session.active)
         if(user){
-            user.uploadedPDFs = user.uploadedPDFs.append(file.originalname)
+            user.uploadedPDFs = [ ...user.uploadedPDFs, file.originalname ]
             await user.save()
             cb(null, `${req.session.username}-${user.uploadedPDFs.length}-${file.originalname}`)
         }else{
@@ -44,7 +44,7 @@ const upload = multer({  dest:"pdfs/", storage: storage })
 /**
  * @Method - POST
  */
- router.post('/upload', upload.any(), (req, res) => {
+ router.post('/upload', session_checker, upload.any(), (req, res) => {
     console.log("DONE")
     res.render('dash', { link: req.session.code });
 });
