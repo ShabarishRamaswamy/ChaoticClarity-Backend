@@ -20,7 +20,6 @@ const UserSchema = new Schema({
         trim: true,
         lowercase: true,
         unique: true,
-        default: "default@duck.com",
         validate(value){
             if(validator.isEmail(value) === false){
                 throw new Error("Please provide a valid Email ID")

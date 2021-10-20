@@ -67,8 +67,8 @@ router.get('/login/github/getUserEmail', async(req, res, next) => {
       }
      
       req.session.active = true
-      req.session.accessToken = user.accessToken
-      req.session.username = user.username
+      req.session.accessToken = user ? user.accessToken : user1.accessToken
+      req.session.username = user? user.username : user1.username
 
       res.render('uploads')
     })
