@@ -21,14 +21,16 @@ router.get('/test', session_checker, function(req, res, next) {
 /**
  * @Method - GET
  */
-router.get('/processPDF/:pdfname/:pdfnumber', session_checker, async(req, res, next) => {
+router.get('/processPDF/:pdfnumber', session_checker, async(req, res, next) => {
     var user = await User.findOne({ username: req.session.username })
     
-    axios.post(process.env.ML_URL, {
-        filename: `${req.query.pdfname}-${req.query.pdfnumber}-${req.session.username}`
+    console.log(`${user.username}-${req.params.pdfnumber}`)
+
+    axios.post(`${process.env.ML_URL}/processPDF`, {
+        filename: `${user.username}-${req.params.pdfnumber}`
     })
     
-    res.render('about', { link: session.code });
+    res.render('about', { link: req.session.code });
 });
 
 module.exports = router;
