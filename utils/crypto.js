@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 const algorithm = process.env.CYPTO_ALGORITHM;
 const secretKey = process.env.SESSION_SECRET;
@@ -6,27 +6,32 @@ const iv = crypto.randomBytes(parseInt(process.env.CRYPTO_BYTES));
 // console.log(iv);
 
 const encrypt = (text) => {
-
     const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
 
     const encrypted = Buffer.concat([cipher.update(text), cipher.final()]);
 
     return {
-        iv: iv.toString('hex'),
-        content: encrypted.toString('hex')
+        iv: iv.toString("hex"),
+        content: encrypted.toString("hex"),
     };
 };
 
 const decrypt = (hash) => {
+    const decipher = crypto.createDecipheriv(
+        algorithm,
+        secretKey,
+        Buffer.from(hash.iv, "hex")
+    );
 
-    const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
-
-    const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);
+    const decrpyted = Buffer.concat([
+        decipher.update(Buffer.from(hash.content, "hex")),
+        decipher.final(),
+    ]);
 
     return decrpyted.toString();
 };
 
 module.exports = {
     encrypt,
-    decrypt
+    decrypt,
 };
